@@ -1,9 +1,10 @@
 import dash
 from dash import dcc, html, Input, Output, State
 import openai
+import os
 
 # Set up the OpenAI API
-openai.api_key = ""
+openai.api_key = os.getenv("OPENAI_API_KEY")
 
 
 app = dash.Dash(__name__)
