@@ -2,7 +2,7 @@ from dash.dependencies import Input, Output, State
 from app import app
 
 from components.textbox import render_textbox
-from pages.chatbot.chatbot_model import conversation
+from pages.chatbot.chatbot_model import conversation, vectordb
 
 @app.callback(
     Output(component_id="display-conversation", component_property="children"), 
@@ -38,9 +38,15 @@ def run_chatbot(n_clicks, n_submit, user_input, chat_history):
         return chat_history, None
     
     chat_history += f"Human: {user_input}<split>ChatBot: "
-    # result_ai = conversation.predict(input=user_input)
-    # model_output = result_ai.strip()
-    # chat_history += f"{model_output}<split>"
 
-    chat_history += "response<split>"
+    print('Retrieving Similar Documents..')
+    docs = vectordb.similarity_search(user_input)
+
+    print('Getting output from the LLM model...')
+    inputs = {"input_documents": docs, "question": user_input}  
+    output = conversation.run(inputs)
+
+    chat_history += f"{output}<split>"
+
+    # chat_history += "response<split>"
     return chat_history, None
