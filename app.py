@@ -10,5 +10,3 @@ app = Dash(__name__,
             update_title='Loading...',
             suppress_callback_exceptions=True,
             external_stylesheets=[dbc.themes.FLATLY])
-
-openai.api_key = os.getenv("OPENAI_API_KEY")
