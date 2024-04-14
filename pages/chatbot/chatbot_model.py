@@ -26,18 +26,12 @@ from langchain.chains.question_answering import load_qa_chain
 
 # Loading Model
 print('Loading the model...')
-from transformers import AutoModelForCausalLM, AutoTokenizer, AutoConfig
+from transformers import AutoModelForCausalLM, AutoTokenizer, AutoConfig, AutoModelForSeq2SeqLM
 
-# device = 'cuda' if torch.cuda.is_available() else 'cpu'
-
-# model_config = AutoConfig.from_pretrained("meta-llama/Llama-2-7b-chat-hf")
-# model = LlamaForCausalLM.from_pretrained("meta-llama/Llama-2-7b-chat-hf",
-#                                          trust_remote_code = True, config = model_config, device_map = 'auto')
-# tokenizer = AutoTokenizer.from_pretrained("meta-llama/Llama-2-7b-chat-hf")
-
-model_name = "facebook/bart-base"
-tokenizer = AutoTokenizer.from_pretrained(model_name)
-model = AutoModelForCausalLM.from_pretrained(model_name)
+model_name = "google/flan-t5-large"
+model_config = AutoConfig.from_pretrained(model_name)
+tokenizer = AutoTokenizer.from_pretrained(model_name, config = model_config, trust_remote_code = True, device_map = 'auto')
+model = AutoModelForSeq2SeqLM.from_pretrained(model_name)
 
 # Creating Pipeline
 print('Creating Pipeline...')
