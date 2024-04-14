@@ -1,7 +1,6 @@
 import dash_bootstrap_components as dbc
 from dash import Dash
 import openai
-import os
 
 APP_TITLE = "Chatbot App"
 
