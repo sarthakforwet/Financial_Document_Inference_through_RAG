@@ -28,15 +28,35 @@ from langchain.chains.question_answering import load_qa_chain
 print('Loading the model...')
 from transformers import AutoModelForCausalLM, AutoTokenizer, AutoConfig, AutoModelForSeq2SeqLM
 
-model_name = "google/flan-t5-large"
-model_config = AutoConfig.from_pretrained(model_name)
-tokenizer = AutoTokenizer.from_pretrained(model_name, config = model_config, trust_remote_code = True, device_map = 'auto')
-model = AutoModelForSeq2SeqLM.from_pretrained(model_name)
+model_id = "google/flan-t5-large"
+#model_id = '/kaggle/input/llama-2/pytorch/13b-chat-hf/1'
+
+device = f'cuda:{cuda.current_device()}' if cuda.is_available() else 'cpu'
+
+# set quantization configuration to load large model with less GPU memory
+# this requires the `bitsandbytes` library
+bnb_config = transformers.BitsAndBytesConfig(
+    load_in_4bit=True,
+    bnb_4bit_quant_type='nf4',
+    bnb_4bit_use_double_quant=True,
+    bnb_4bit_compute_dtype=bfloat16
+)
+
+model_config = transformers.AutoConfig.from_pretrained(
+    model_id,
+    load_in_4bit=True
+)
+
+model = AutoModelForSeq2SeqLM.from_pretrained(model_id,
+                                              trust_remote_code=True,
+                                              config=model_config,
+                                              device_map='auto')
+tokenizer = AutoTokenizer.from_pretrained(model_id)
 
 # Creating Pipeline
 print('Creating Pipeline...')
 query_pipeline = transformers.pipeline(
-        "text-generation",
+        "text2text-generation",
         model=model,
         tokenizer=tokenizer,
         torch_dtype=torch.float16,
@@ -75,6 +95,7 @@ print('Preparing chain...')
 conversation = load_qa_chain(llm, chain_type="map_reduce")
 
 print('Chain Prepared...')
+
 # chat = OpenAI(temperature=0)
 
 
