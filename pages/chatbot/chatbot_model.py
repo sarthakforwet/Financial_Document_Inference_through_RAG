@@ -52,8 +52,8 @@ elif MODEL_NAME == "LLAMA2":
 	                                         trust_remote_code = True, config = model_config, device_map = 'auto')
 	tokenizer = AutoTokenizer.from_pretrained("meta-llama/Llama-2-7b-chat-hf")
 
-elif MODEL_NAME == "BART":
-	model_name = "facebook/bart-base"
+elif MODEL_NAME == "FLANT5":
+	model_name = "google/flan-t5-large"
 	tokenizer = AutoTokenizer.from_pretrained(model_name)
 	model = AutoModelForCausalLM.from_pretrained(model_name)
 

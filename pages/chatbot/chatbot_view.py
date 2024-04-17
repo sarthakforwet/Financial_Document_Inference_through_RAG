@@ -22,7 +22,7 @@ chatbot_layout = html.Div(
 def render_chatbot():
     return html.Div(
         [
-            render_navbar(brand_name="AI Chatbot"),
+            render_navbar(brand_name="AI Chatbot for Financial Reports (10Q, 10K)"),
             html.Br(),
             dcc.Store(id="store-conversation", data=""),
             dbc.Container(
