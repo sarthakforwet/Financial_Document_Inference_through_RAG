@@ -99,7 +99,7 @@ print('Preparing chain...')
 if MODEL_NAME == "GPT":
 
 	# Define prompt template
-	template = """You are an assistant for question-answering tasks for Retrieval Augmented Generation system. 
+	template = """You are an assistant for question-answering tasks for Retrieval Augmented Generation system for the financial reports such as 10Q and 10K.
 	Use the following pieces of retrieved context to answer the question. 
 	If you don't know the answer, just say that you don't know. 
 	Use two sentences maximum and keep the answer concise.
