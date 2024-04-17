@@ -52,4 +52,4 @@ pip install -r requirements.txt
 
 | Contributor 1 | Contributor 2 | Contributor 3 |
 | ------------- | ------------- | ------------- |
-| Harshit Kumar | Sarthak Khandelwal | Alexander Leon |
+| [Harshit Kumar](https://github.com/kHarshit) | [Sarthak Khandelwal](https://github.com/sarthakforwet) | Alexander Leon |
