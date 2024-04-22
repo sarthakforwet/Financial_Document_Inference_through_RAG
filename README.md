@@ -48,6 +48,22 @@ Description:
 pip install -r requirements.txt
 ```
 
+# Run
+
+```
+python index.py
+```
+
+# Code / Notebooks: 
+
+*Notebooks referenced from Kaggle*
+
+* LLama 2: [rag_llama2.ipynb](./rag_llama2.ipynb)
+* Gemma 1.1: [rag_gemma1.ipynb](./rag_gemma1.ipynb)
+* GPT-3.5: [pages/chatbot/chatbot_model.py](./pages/chatbot/chatbot_model.py)
+* Evaluation: [eval.py](./eval.py)
+
+
 # Contributors
 
 | Contributor 1 | Contributor 2 | Contributor 3 |
